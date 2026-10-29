@@ -102,6 +102,7 @@ export function Escena() {
     punteros.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
     if (punteros.current.size === 2) {
       const [a, b] = [...punteros.current.values()];
+      if (!a || !b) return;
       pinch.current = { d: Math.hypot(a.x - b.x, a.y - b.y) };
     }
   };
@@ -112,6 +113,7 @@ export function Escena() {
     punteros.current.set(e.pointerId, actual);
     if (punteros.current.size === 2 && pinch.current) {
       const [a, b] = [...punteros.current.values()];
+      if (!a || !b) return;
       const d = Math.hypot(a.x - b.x, a.y - b.y);
       zoomEn(vistaRef.current.s * (d / pinch.current.d), (a.x + b.x) / 2, (a.y + b.y) / 2);
       pinch.current.d = d;
