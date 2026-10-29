@@ -11,14 +11,28 @@ import cuadro from "@/assets/Cuadro.png.asset.json";
 import librero from "@/assets/Librero.jpg.asset.json";
 import planta from "@/assets/Planta.png.asset.json";
 
-export const TITULO = "Mi cuarto";
+export type PanelId = "cel" | "computadora" | "grabadora" | "librero";
+export type AnimId = "zzz" | "cuadro" | "murcielago" | "pez";
 
-// Opciones del menú: agrega o cambia aquí sin tocar el resto.
-export const MENU_ITEMS = [
-  { id: "op1", label: "Opción 1" },
-  { id: "op2", label: "Opción 2" },
-  { id: "op3", label: "Opción 3" },
+// Cada opción del menú abre el panel del objeto indicado.
+export const MENU_ITEMS: { id: string; label: string; objeto: PanelId }[] = [
+  { id: "music", label: "Music", objeto: "grabadora" },
+  { id: "books", label: "Books", objeto: "librero" },
+  { id: "calendar", label: "Calendar", objeto: "computadora" },
 ];
+
+// Qué hace cada objeto al tocarlo (los que no aparecen solo dan retroalimentación).
+export const ACCIONES: Record<string, { panel: PanelId } | { anim: AnimId }> = {
+  cel: { panel: "cel" },
+  computadora: { panel: "computadora" },
+  grabadora: { panel: "grabadora" },
+  librero: { panel: "librero" },
+  cama: { anim: "zzz" },
+  cuadro: { anim: "cuadro" },
+  "planta-izq": { anim: "murcielago" },
+  "planta-der": { anim: "murcielago" },
+  pecera: { anim: "pez" },
+};
 
 export const FONDO = { imagen: cuarto.url, alt: "Recámara rosa con cortinas al centro" };
 export const PROPORCION = 736 / 552; // proporción de Cuarto.jpg
@@ -34,7 +48,7 @@ export type Objeto = {
   rotate?: number; // grados
   z: number;
   alt: string;
-  minTap?: boolean; // área táctil mínima de 44x44 px (fase 2)
+  minTap?: boolean; // área táctil mínima de 44x44 px
 };
 
 export const OBJETOS: Objeto[] = [
@@ -53,3 +67,4 @@ export const OBJETOS: Objeto[] = [
 
 export const ZOOM_MIN = 1;
 export const ZOOM_MAX = 3;
+export const UMBRAL_TOQUE = 8; // px: más movimiento que esto es arrastre, no toque
