@@ -24,7 +24,7 @@ export function Libros() {
     } catch { setEstado("error"); }
   };
   const leidos = lista.filter((l) => l.read).length;
-  const Portada = ({ l }: { l: Libro }) => l.coverUrl ? <img src={l.coverUrl} alt="" className="portada libro" loading="lazy" /> : <div className="portada libro vacia" aria-hidden>📖</div>;
+  const Portada = ({ l }: { l: Libro }) => l.coverUrl ? <img src={l.coverUrl} alt="" className="portada libro" loading="lazy" /> : <div className="portada libro vacia" aria-hidden />;
 
   return (
     <div>
